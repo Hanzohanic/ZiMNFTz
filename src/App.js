@@ -1,49 +1,24 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
+import { useState } from "react";
+import MintNFT from "./components/MintNFT";
+import MyNFTs from "./components/MyNFTs";
 import "./styles/Home.css";
 
 export default function Home() {
+  const [isMintingNFT, setIsMintingNFT] = useState(true);
+
+  const handleTabChange = () => {
+    setIsMintingNFT(!isMintingNFT);
+  };
+
   return (
-    <div className="container">
-      <main className="main">
-        <h1 className="title">
-          Welcome to <a href="https://thirdweb.com/">thirdweb</a>!
-        </h1>
-
-        <p className="description">
-          Get started by configuring your desired network in{" "}
-          <code className="code">src/index.js</code>, then modify the{" "}
-          <code className="code">src/App.js</code> file!
-        </p>
-
-        <div className="connect">
-          <ConnectWallet />
-        </div>
-
-        <div className="grid">
-          <a href="https://portal.thirdweb.com/" className="card">
-            <h2>Portal &rarr;</h2>
-            <p>
-              Guides, references and resources that will help you build with
-              thirdweb.
-            </p>
-          </a>
-
-          <a href="https://thirdweb.com/dashboard" className="card">
-            <h2>Dashboard &rarr;</h2>
-            <p>
-              Deploy, configure and manage your smart contracts from the
-              dashboard.
-            </p>
-          </a>
-
-          <a href="https://portal.thirdweb.com/templates" className="card">
-            <h2>Templates &rarr;</h2>
-            <p>
-              Discover and clone template projects showcasing thirdweb features.
-            </p>
-          </a>
-        </div>
-      </main>
+    <div className="flex flex-col h-screen bg-red justify-center items-center home-container">
+      <h1 className="text-4xl font-bold text-green mb-4 home-header">ZiM NFTz</h1>
+      <div className="flex justify-center mb-4 button-container">
+        <button onClick={handleTabChange} className="button  py-2 px-4 rounded-md text-white font-bold shadow-lg hover:bg-blue-600 transition-all duration-300">
+          {isMintingNFT ? "View My NFTs" : "Mint a New NFT"}
+        </button>
+      </div>
+      {isMintingNFT ? <MintNFT /> : <MyNFTs />}
     </div>
   );
 }
